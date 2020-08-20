@@ -1,1 +1,1 @@
-# Work Plan 2. Biomechanical simulation of human
+# Work Plan 2. Biomechanical simulation of humans
