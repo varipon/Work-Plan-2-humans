@@ -4,7 +4,7 @@
 
 # The MIT License (MIT)
 
-# Copyright (c) 2020 Yutaca Sawai (Varipon Institute)
+# Copyright (c) 2020 澤井豐 Yutaka Sawai (Varipon)
 
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
