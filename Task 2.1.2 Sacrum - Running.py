@@ -1441,7 +1441,7 @@ def sacrum():
     P = (-0.37785/0.431828)*A
     
 # name
-    move = 'front-crawl'
+    move = 'running'
 
 # left or right
     helicity = 'left'
