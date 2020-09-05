@@ -1179,7 +1179,7 @@ def forewings():
     P = (-0.207333/0.276443)*A
     
 # name
-    move = 'breast-stroke'
+    move = 'running'
 
 # element
     part = 'forewing-left'
