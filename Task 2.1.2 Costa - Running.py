@@ -1496,7 +1496,7 @@ def costa():
     P = (-0.117715/0.158059)*A
     
 # name
-    move = 'front-crawl'
+    move = 'running'
 
 # left or right
     helicity = 'left'
