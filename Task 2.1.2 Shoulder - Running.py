@@ -858,7 +858,7 @@ def shoulder():
     end = start+720
     
 # name
-    move = 'front-crawl'
+    move = 'running'
     
 # scale factor
     A = 0.431828
