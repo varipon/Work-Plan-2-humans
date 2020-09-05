@@ -1179,7 +1179,7 @@ def hindwings():
     P = (-0.241888/0.276443)*A
     
 # name
-    move = 'breast-stroke'
+    move = 'running'
 
 # element
     part = 'hindwing-left'
