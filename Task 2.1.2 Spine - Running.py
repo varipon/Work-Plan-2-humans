@@ -786,7 +786,7 @@ def spine():
     P = (-0.542554/0.578724)*A
     
 # name
-    move = 'breast-stroke'
+    move = 'running'
 
 # element
     part = 'spine'
