@@ -5015,8 +5015,8 @@ def neck():
 # left or right
     helicity = 'left'
 
-    start = -90
-    end = start+720
+    start = 0
+    end = start+1440
 
     global neck
     neck = Neck(P, A, move, part, helicity, start, end)
