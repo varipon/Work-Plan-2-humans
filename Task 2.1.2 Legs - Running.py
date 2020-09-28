@@ -754,7 +754,7 @@ def legs():
     A = 0.45
 
 # pivot factor
-    P = (0.243349/0.45)*A
+    P = (0.26/0.45)*A
     
 # name
     move = 'running'
@@ -772,7 +772,7 @@ def legs():
     leg_right = Leg(P, A, move, part, helicity, start, end)
 
     leg_loc = ((-1.22621/0.45)*A, (11.0924/0.45)*A, (-1.05034/0.45)*A)
-    leg_rot = mathutils.Euler((math.radians(0.0), math.radians(-180), math.radians(0.0)), 'XYZ')
+    leg_rot = mathutils.Euler((math.radians(0.0), math.radians(-180), math.radians(-8.0)), 'XYZ')
 
     # position
     leg_right.rig.location.x += leg_loc[0]
@@ -794,7 +794,7 @@ def legs():
     leg_left = Leg(P, A, move, part, helicity, start, end)
 
     leg_loc = ((-1.22621/0.45)*A, (11.0976/0.45)*A, (3.51433/0.45)*A)
-    leg_rot = mathutils.Euler((math.radians(0.0), math.radians(-180), math.radians(0.0)), 'XYZ')
+    leg_rot = mathutils.Euler((math.radians(0.0), math.radians(-180), math.radians(-8.0)), 'XYZ')
 
     # position 
     leg_left.rig.location.x += leg_loc[0]
