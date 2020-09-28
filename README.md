@@ -1,6 +1,6 @@
 # Work Plan 2. Biomechanical simulation of humans
 
-Task 2.1 : The Run « https://lnkd.in/fHg_dkz »
+(Update) Task 2.1 : The Run « https://lnkd.in/fHg_dkz »
 
 Task 2.2 : The Walk « http://goo.gl/xsq9Mg »
 
@@ -12,7 +12,7 @@ Task 2.5 : Hands, the automatisme in orthopedics « https://goo.gl/MnUWgX »
 
 Task 2.6 : Front Crawl « https://goo.gl/MpI1po »
 
-(Update) Task 2.7 : Breast stroke « https://bit.ly/3aqazX0 »
+Task 2.7 : Breast stroke « https://bit.ly/3aqazX0 »
 
 Task 2.8 : Butterfly stroke « https://goo.gl/3RzstG »
 
