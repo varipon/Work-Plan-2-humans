@@ -5109,7 +5109,7 @@ def legs():
     A = 0.45
 
 # pivot factor
-    P = (0.243349/0.45)*A
+    P = (0.26/0.45)*A
     
 # name
     move = 'running'
@@ -5166,7 +5166,7 @@ def hindwings():
 #    leg_loc = ((-0.95425/0.276443)*A, (-2.41956/0.276443)*A, (-3.76062/0.276443)*A) #212.81
 #    leg_loc = ((-0.931201/0.2211544)*A, (-2.44465/0.2211544)*A, (-3.74936/0.2211544)*A) #212.82
     leg_loc = ((-0.912769/0.1769235)*A, (-2.46472/0.1769235)*A, (-3.74035/0.1769235)*A) #212.83
-    leg_rot = mathutils.Euler((math.radians(453.113), math.radians(-33.8114), math.radians(-346.833)), 'XYZ')
+    leg_rot = mathutils.Euler((math.radians(453.189), math.radians(-35.8084), math.radians(-346.967)), 'XYZ')
 
     global hindwing_left
     hindwing_left = HindWing(P, A, move, part, helicity, start, end,
@@ -5186,7 +5186,7 @@ def hindwings():
 #    leg_loc = ((-1.067/0.276443)*A, (-2.63473/0.276443)*A, (3.65815/0.276443)*A) #212.81
 #    leg_loc = ((-1.04396/0.2211544)*A, (-2.65982/0.2211544)*A, (3.64689/0.2211544)*A) #212.82
     leg_loc = ((-1.02552/0.1769235)*A, (-2.67989/0.1769235)*A, (3.63789/0.1769235)*A) #212.83
-    leg_rot = mathutils.Euler((math.radians(266.624), math.radians(35.5), math.radians(-340)), 'XYZ')
+    leg_rot = mathutils.Euler((math.radians(266.536), math.radians(37.4964), math.radians(-340.148)), 'XYZ')
 
     global hindwing_right
     hindwing_right = HindWing(P, A, move, part, helicity, start, end,
