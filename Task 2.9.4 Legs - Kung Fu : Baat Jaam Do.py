@@ -1185,8 +1185,8 @@ def legs():
 # left or right
     helicity = 'left'
 
-    start = -2679.14
-    end = start+360
+    start = 0
+    end = start+720
 
     global leg_left
     leg_left = Legs(P, A, move, part, helicity, start, end)
@@ -1215,8 +1215,8 @@ def foots():
 # left or right
     helicity = 'left'
 
-    start = -2679.14
-    end = start+360
+    start = 0
+    end = start+720
 
     global sacrum
 
@@ -1245,8 +1245,8 @@ def foots():
 # left or right
     helicity = 'left'
 
-    start = -2679.14
-    end = start+360
+    start = 0
+    end = start+720
 
     leg_left_loc = ((2.98974/0.702349)*A, (0.887694/0.702349)*A, (20.358/0.702349)*A)
     leg_left_rot = mathutils.Euler((math.radians(-180.0), math.radians(0.0), math.radians(-180)), 'XYZ')
