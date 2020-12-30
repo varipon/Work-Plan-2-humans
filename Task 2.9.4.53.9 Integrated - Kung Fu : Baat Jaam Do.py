@@ -5696,8 +5696,8 @@ def shoulder():
     global forewing_left
     forewing = forewing_left
 
-    forewing_loc = ((-3.29307/0.431828)*A, (3.56985/0.431828)*A, (-3.00642/0.431828)*A)
-    forewing_rot = mathutils.Euler((math.radians(291.237), math.radians(-25.803), math.radians(-497.345)), 'XYZ')
+    forewing_loc = ((-3.07453/0.431828)*A, (3.21549/0.431828)*A, (-3.17603/0.431828)*A)
+    forewing_rot = mathutils.Euler((math.radians(309.351), math.radians(-30.0773), math.radians(-514.799)), 'XYZ')
 
     global shoulder_left
     shoulder_left = LeftShoulder(P, A, move, part, helicity, start, end,
@@ -5709,8 +5709,8 @@ def shoulder():
     global forewing_right
     forewing = forewing_right
 
-    forewing_loc = ((-0.352929/0.431828)*A, (-5.53467/0.431828)*A, (-3.07944/0.431828)*A)
-    forewing_rot = mathutils.Euler((math.radians(246.184), math.radians(-28.0856), math.radians(-526.436)), 'XYZ')
+    forewing_loc = ((-0.850601/0.431828)*A, (-5.56306/0.431828)*A, (-2.6568/0.431828)*A)
+    forewing_rot = mathutils.Euler((math.radians(238.889), math.radians(-41.5049), math.radians(-519.158)), 'XYZ')
 
     global shoulder_right
     shoulder_right = RightShoulder(P, A, move, part, helicity, start, end,
