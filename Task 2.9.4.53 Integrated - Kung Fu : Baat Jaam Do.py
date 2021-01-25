@@ -4,7 +4,7 @@
 
 # The MIT License (MIT)
 
-# Copyright (c) 2020 Yutaka Sawai (Varipon)
+# Copyright (c) 2021 Yutaka Sawai (Varipon)
 
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -5218,9 +5218,9 @@ def shoulder():
 
     global forewing_right
     forewing = forewing_right
-
-    forewing_loc = ((-0.850601/0.431828)*A, (-5.56306/0.431828)*A, (-2.6568/0.431828)*A)
-    forewing_rot = mathutils.Euler((math.radians(238.889), math.radians(-41.5049), math.radians(-519.158)), 'XYZ')
+ 
+    forewing_loc = ((-0.438647/0.431828)*A, (-4.82555/0.431828)*A, (-3.44835/0.431828)*A)
+    forewing_rot = mathutils.Euler((math.radians(221.222), math.radians(-26.575), math.radians(-504.396)), 'XYZ')
 
     global shoulder_right
     shoulder_right = RightShoulder(P, A, move, part, helicity, start, end,
