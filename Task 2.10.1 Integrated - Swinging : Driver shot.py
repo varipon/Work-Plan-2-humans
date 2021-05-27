@@ -4954,7 +4954,7 @@ class Sacrum(Formula):
     #   Z = -Q*2
         Z = 0.0
 
-        obj_joint = bpy.data.objects["joint.gold.arm.a2a1"].copy()
+        obj_joint = bpy.data.objects["joint.gold.000"].copy()
         obj_joint.location = (0.0, 0.0, -Q*3+Z)
         obj_joint.scale = (A, A, A)
         obj_joint.name = "a2a1.mesh." + move + '.' + part +'.' + helicity
@@ -5926,8 +5926,8 @@ def neck():
 
 def shoulder():
 
-    start = -45
-    end = start+720
+    start = 45
+    end = start-720
  
 # name
     move = 'swing'
@@ -5942,7 +5942,7 @@ def shoulder():
     part = 'left-shoulder'
 
 # left or right
-    helicity = 'left'
+    helicity = 'right'
 
     global arm_left
     arm = arm_left
