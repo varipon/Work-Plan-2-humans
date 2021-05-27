@@ -707,10 +707,10 @@ class Wrist(Formula):
         self.configRotation(self.rig, self.interval, self.frame_start, self.frame_end, self.start, self.end)
 
         # Configuration Linkage
-        self.configLink(1.25*self.A*0.8, self.J, self.helicity, self.rig, self.move, self.part)
+        self.configLink(self.A*0.3, self.J, self.helicity, self.rig, self.move, self.part)
 
         # Construction Linkage
-        self.constructLink(1.25*self.A*0.8, self.J, self.helicity, self.rig, self.move, self.part)
+        self.constructLink(self.A*0.3, self.J, self.helicity, self.rig, self.move, self.part)
 
     # Overriding Configuration Movement
     def configMovement(self, P, A, J, a, b, y, o):
@@ -980,10 +980,10 @@ class Arm(Formula):
         self.configRotation(self.rig, self.interval, self.frame_start, self.frame_end, self.start, self.end)
 
         # Configuration Linkage
-        self.configLink(1.25*self.A*0.8, self.J, self.helicity, self.rig, self.move, self.part)
+        self.configLink(self.A*0.8779325, self.J, self.helicity, self.rig, self.move, self.part)
 
         # Construction Linkage
-        self.constructLink(1.25*self.A*0.8, self.J, self.helicity, self.rig, self.move, self.part)
+        self.constructLink(self.A*0.8779325, self.J, self.helicity, self.rig, self.move, self.part)
 
     # Overriding Configuration Movement
     def configMovement(self, P, A, J, a, b, y, o):
@@ -1255,10 +1255,10 @@ class Arm2(Arm):
         self.configRotation(self.rig, self.interval, self.frame_start, self.frame_end, self.start, self.end)
 
         # Configuration Linkage
-        self.configLink(1.25*self.A*0.8, self.J, self.helicity, self.rig, self.move, self.part)
+        self.configLink(self.A*0.8, self.J, self.helicity, self.rig, self.move, self.part)
 
         # Construction Linkage
-        self.constructLink(1.25*self.A*0.8, self.J, self.helicity, self.rig, self.move, self.part)
+        self.constructLink(self.A*0.8, self.J, self.helicity, self.rig, self.move, self.part)
        
 
 class ForeWing(Formula):
@@ -2000,10 +2000,10 @@ class LeftArm(Formula):
 #        self.configRotation(self.rig, self.interval, self.frame_start, self.frame_end, self.start, self.end)
 
         # Configuration Linkage
-        self.configLink(self.A, self.J, self.helicity, self.rig, self.move, self.part)
+        self.configLink(self.A*0.8779325, self.J, self.helicity, self.rig, self.move, self.part)
 
         # Construction Linkage
-        self.constructLink(self.A, self.J, self.helicity, self.rig, self.move, self.part)
+        self.constructLink(self.A*0.8779325, self.J, self.helicity, self.rig, self.move, self.part)
 
     # Overriding Configuration Movement
     def configMovement(self, P, A, J, a, b, y, o, w, gimbal_b, gimbal_y):
@@ -2214,7 +2214,7 @@ class LeftArm(Formula):
         obj_joint.name = "y4y5.mesh." + move + '.' + part +'.' + helicity
         bpy.data.collections['link'].objects.link(obj_joint)
 
-        obj_joint = bpy.data.objects["joint.gold.001"].copy()
+        obj_joint = bpy.data.objects["joint.cursor"].copy()
         obj_joint.location = (0.0, 0.0, 0.0)
         obj_joint.scale = (A, A, A)
         obj_joint.name = "y6y7.mesh." + move + '.' + part +'.' + helicity
@@ -2232,75 +2232,6 @@ class LeftArm(Formula):
 class RightArm(LeftArm):
 
     J = 8 #joint number
-
-    # Overriding
-    def __init__(self, P, A, move, part, helicity, start, end):
-
-        global interval
-        global frame_start
-        global frame_end
-
-        self.interval = interval
-        self.frame_start = frame_start
-        self.frame_end = frame_end
-
-        # pivot factor
-        self.P = P
-
-        # scale factor
-        self.A = A 
-
-        # name
-        self.move = move
-
-        # element
-        self.part = part
-
-        # element helicity
-        self.helicity = helicity
-
-        self.start = start
-        self.end = end
-
-        # Create armature and object
-        self.amt = bpy.data.armatures.new(move + '.' + part + '.' + helicity + '.data')
-        self.rig = bpy.data.objects.new(move + '.' + part + '.' + helicity, self.amt)
-
-        # Joints
-        # Joints α(n) -> a[n], β(n) -> b[n], γ(n) -> y[n], δ(n) -> o[n]
-        self.a = [0 for i in range(self.J)] # Joint α
-        self.b = [0 for i in range(self.J)] # Joint β
-        self.y = [0 for i in range(self.J)] # Joint γ
-        self.o = [0 for i in range(self.J)] # Joint δ
-
-        # Joints ω(n) -> w[n]
-        self.w = [0 for i in range(self.J)] # Joint ω
-
-        # gimbal
-        self.gimbal_b = [0 for i in range(self.J)] # Joint β
-        self.gimbal_y = [0 for i in range(self.J)] # Joint γ
-
-        # Configuration Movement
-        self.configMovement(self.P, self.A, self.J,
-            self.a, self.b, self.y, self.o,
-            self.w,
-            self.gimbal_b, self.gimbal_y)
-
-        # Construction Movement
-        self.constructMovement(self.J, self.helicity, self.part,
-            self.amt, self.rig, 
-            self.a, self.b, self.y, self.o,
-            self.w,
-            self.gimbal_b, self.gimbal_y)
-
-        # Construction Rotation
-#        self.configRotation(self.rig, self.interval, self.frame_start, self.frame_end, self.start, self.end)
-
-        # Configuration Linkage
-        self.configLink(self.A, self.J, self.helicity, self.rig, self.move, self.part)
-
-        # Construction Linkage
-        self.constructLink(self.A, self.J, self.helicity, self.rig, self.move, self.part)
 
     # Overriding Configuration Movement
     def configMovement(self, P, A, J, a, b, y, o, w, gimbal_b, gimbal_y):
@@ -2389,10 +2320,10 @@ class Neck(Formula):
         self.configRotation(self.rig, self.interval, self.frame_start, self.frame_end, self.start, self.end)
 
         # Configuration Linkage
-        self.configLink(self.A*0.4, self.J, self.helicity, self.rig, self.move, self.part)
+        self.configLink(self.A*0.3, self.J, self.helicity, self.rig, self.move, self.part)
 
         # Construction Linkage
-        self.constructLink(self.A*0.4, self.J, self.helicity, self.rig, self.move, self.part)
+        self.constructLink(self.A*0.3, self.J, self.helicity, self.rig, self.move, self.part)
 
     # Overriding Configuration Movement
     def configMovement(self, P, A, J, a, b, y, o):
@@ -3382,7 +3313,7 @@ class Costa(Formula):
         bpy.data.collections['link'].objects.link(obj_joint)
 
         # Pattern 1 of ob
-        obj_joint = bpy.data.objects["joint.blue.costa.001"].copy()
+        obj_joint = bpy.data.objects["joint.blue.001"].copy()
         obj_joint.location = (0.0, 0.0, -Q*2 + Q*(n % 2)*6 +Z)
         obj_joint.scale = (A, A, A)
         obj_joint.name = "o"+str(n)+"b"+str(n+1)+".mesh." + move + '.' + part +'.' + helicity
@@ -3790,10 +3721,10 @@ class LeftIlium(Formula):
         self.configRotation(self.rig, self.interval, self.frame_start, self.frame_end, self.start, self.end)
 
         # Configuration Linkage
-        self.configLink(self.A*0.6, self.J, self.helicity, self.rig, self.move, self.part)
+        self.configLink(self.A*0.2677480422, self.J, self.helicity, self.rig, self.move, self.part)
 
         # Construction Linkage
-        self.constructLink(self.A*0.6, self.J, self.helicity, self.rig, self.move, self.part)
+        self.constructLink(self.A*0.2677480422, self.J, self.helicity, self.rig, self.move, self.part)
 
     # Overriding Configuration Movement
     def configMovement(self, P, A, J, a, b, y, o):
@@ -3993,70 +3924,6 @@ class LeftIlium(Formula):
 class RightIlium(LeftIlium):
 
     J = 5 #joint number
-
-    # Overriding
-    def __init__(self, P, A, move, part, helicity, start, end, disciple_loc, disciple_rot, disciple):
-
-        global interval
-        global frame_start
-        global frame_end
-
-        self.interval = interval
-        self.frame_start = frame_start
-        self.frame_end = frame_end
-
-        # pivot factor
-        self.P = P
-
-        # scale factor
-        self.A = A 
-
-        # name
-        self.move = move
-
-        # element
-        self.part = part
-
-        # element helicity
-        self.helicity = helicity
-
-        self.start = start
-        self.end = end
-
-        # disciple position
-        self.disciple_loc = disciple_loc
-        self.disciple_rot = disciple_rot
-
-        # disciple
-        self.disciple = disciple
-
-        # Create armature and object
-        self.amt = bpy.data.armatures.new(move + '.' + part + '.' + helicity + '.data')
-        self.rig = bpy.data.objects.new(move + '.' + part + '.' + helicity, self.amt)
-
-        # Joints
-        self.a = [0 for i in range(4)] # Joint α
-        self.b = [0 for i in range(self.J)] # Joint β
-        self.y = [0 for i in range(self.J)] # Joint γ
-        self.o = [0 for i in range(self.J)] # Joint δ
-
-        # Configuration Movement
-        self.configMovement(self.P, self.A, self.J, self.a, self.b, self.y, self.o)
-
-        # Construction Movement
-        self.constructMovement(self.J, self.helicity, self.amt, self.rig, self.a, self.b, self.y, self.o)
-
-        # Parent set disciple to master       
-        self.setParent(self.helicity, self.move, self.rig, self.disciple_loc, self.disciple_rot, self.disciple)
-
-        # Construction Rotation
-        self.configRotation(self.rig, self.interval, self.frame_start, self.frame_end, self.start, self.end)
-
-        # Configuration Linkage
-        self.configLink(self.A*0.6, self.J, self.helicity, self.rig, self.move, self.part)
-
-        # Construction Linkage
-        self.constructLink(self.A*0.6, self.J, self.helicity, self.rig, self.move, self.part)
 
     # Overriding Configuration Movement
     def configMovement(self, P, A, J, a, b, y, o):
@@ -4984,10 +4851,10 @@ class Sacrum(Formula):
         self.configRotation(self.rig, self.interval, self.frame_start, self.frame_end, self.start, self.end)
 
         # Configuration Linkage
-        self.configLink(1.25*self.A*0.8, self.J, self.helicity, self.rig, self.move, self.part)
+        self.configLink(self.A*0.6, self.J, self.helicity, self.rig, self.move, self.part)
 
         # Construction Linkage
-        self.constructLink(1.25*self.A*0.8, self.J, self.helicity, self.rig, self.move, self.part)
+        self.constructLink(self.A*0.6, self.J, self.helicity, self.rig, self.move, self.part)
 
     # Overriding Configuration Movement
     def configMovement(self, P, A, J, a, b, y, o):
@@ -5018,7 +4885,7 @@ class Sacrum(Formula):
         b[3] = mathutils.Euler(((0.517*0.43/0.431828)*A, (-1.2*0.43/0.431828)*A, 0.0), 'XYZ')
         print ("b3 =", b[3])
         
-        b[4] = mathutils.Euler(((-2.31127*0.43/0.431828)*A, (5.34558*0.43/0.431828)*A, 0.0), 'XYZ')
+        b[4] = mathutils.Euler(((-2.31127*0.43/0.431828)*A, (5.34558*0.43/0.431828)*A-1.0, 0.0), 'XYZ')
         print ("b4 =", b[4])
         
         y[2] = mathutils.Euler((A, -A, 0.0), 'XYZ')
@@ -5033,13 +4900,13 @@ class Sacrum(Formula):
         o[3] = mathutils.Euler(((-2.31127*0.43/0.431828)*A, (-1.48284*0.43/0.431828)*A, 0.0), 'XYZ')
         print ("o3 =", o[3])
         
-        o[4] = mathutils.Euler(((0.234319*0.43/0.431828)*A, (5.34558*0.43/0.431828)*A, 0.0), 'XYZ')
+        o[4] = mathutils.Euler(((0.234319*0.43/0.431828)*A, (5.34558*0.43/0.431828)*A-1.0, 0.0), 'XYZ')
         print ("o4 =", o[4])
         
-        y[4] = mathutils.Euler(((0.517161*0.43/0.431828)*A, (5.34558*0.43/0.431828)*A, 0.0), 'XYZ')
+        y[4] = mathutils.Euler(((0.517161*0.43/0.431828)*A, (5.34558*0.43/0.431828)*A-1.0, 0.0), 'XYZ')
         print ("y4 =", y[4])
         
-        y[5] = mathutils.Euler(((0.517161*0.43/0.431828)*A, (6.02843*0.43/0.431828)*A, 0.0), 'XYZ')
+        y[5] = mathutils.Euler(((0.517161*0.43/0.431828)*A, (6.02843*0.43/0.431828)*A-1.0, 0.0), 'XYZ')
         print ("y5 =", y[5])
 
     # Parent set disciple to master
@@ -5225,10 +5092,10 @@ class Foot(Formula):
         self.configRotation(self.rig, self.interval, self.frame_start, self.frame_end, self.start, self.end)
 
         # Configuration Linkage
-        self.configLink(self.A*0.7, self.J, self.helicity, self.rig, self.move, self.part)
+        self.configLink(self.A*0.3, self.J, self.helicity, self.rig, self.move, self.part)
 
         # Construction Linkage
-        self.constructLink(self.A*0.7, self.J, self.helicity, self.rig, self.move, self.part)
+        self.constructLink(self.A*0.3, self.J, self.helicity, self.rig, self.move, self.part)
 
     # Overriding Configuration Movement
     def configMovement(self, P, A, J, a, b, y, o):
@@ -5391,7 +5258,7 @@ class Foot(Formula):
     #   Z = -Q*2
         Z = 0.0
 
-        obj_joint = bpy.data.objects["joint.gold.000"].copy()
+        obj_joint = bpy.data.objects["joint.gold.foot.a2a1"].copy()
         obj_joint.location = (0.0, 0.0, -Q*3+Z)
         obj_joint.scale = (A, A, A)
         obj_joint.name = "a2a1.mesh." + move + '.' + part +'.' + helicity
@@ -5505,10 +5372,10 @@ class Heel(Foot):
         self.configRotation(self.rig, self.interval, self.frame_start, self.frame_end, self.start, self.end)
 
         # Configuration Linkage
-        self.configLink(self.A*0.7/(self.A/0.702349), self.J, self.helicity, self.rig, self.move, self.part)
+        self.configLink(self.A*0.4271380752/(self.A/0.702349), self.J, self.helicity, self.rig, self.move, self.part)
 
         # Construction Linkage
-        self.constructLink(self.A*0.7/(self.A/0.702349), self.J, self.helicity, self.rig, self.move, self.part)
+        self.constructLink(self.A*0.4271380752/(self.A/0.702349), self.J, self.helicity, self.rig, self.move, self.part)
 
     # Parent set disciple to master
     def setParent(self, helicity, move, rig, disciple):
@@ -5528,6 +5395,68 @@ class Heel(Foot):
         cns.name = 'Damped Track'
         cns.target = rig
         cns.subtarget = 'a2a1'
+        
+    def configLink(self, A, J, helicity, rig, move, part):
+
+        bpy.ops.object.mode_set(mode='OBJECT')
+    
+        Q = (0.18648+0.146446)*A
+    #   Z = -Q*2
+        Z = 0.0
+
+        obj_joint = bpy.data.objects["joint.gold.heel.a2a1"].copy()
+        obj_joint.location = (0.0, 0.0, -Q*3+Z)
+        obj_joint.scale = (A, A, A)
+        obj_joint.name = "a2a1.mesh." + move + '.' + part +'.' + helicity
+        bpy.data.collections['link'].objects.link(obj_joint)
+
+        obj_joint = bpy.data.objects["joint.silver.001"].copy()
+        obj_joint.location = (0.0, 0.0, +Q+Z)
+        obj_joint.scale = (A, A, A)
+        obj_joint.name = "y1a2.mesh." + move + '.' + part +'.' + helicity
+        bpy.data.collections['link'].objects.link(obj_joint)
+
+        obj_joint = bpy.data.objects["joint.copper.y1o1.sacrum.B"].copy()
+        obj_joint.location = (0.0, 0.0, +Q*3+Z)
+        obj_joint.scale = (A, A, A)
+        obj_joint.name = "y1o1.mesh." + move + '.' + part +'.' + helicity
+        bpy.data.collections['link'].objects.link(obj_joint)
+
+        obj_joint = bpy.data.objects["joint.blue.001"].copy()
+        obj_joint.location = (0.0, 0.0, -Q*2+Z)
+        obj_joint.scale = (A, A, A)
+        obj_joint.name = "a1b1.mesh." + move + '.' + part +'.' + helicity
+        bpy.data.collections['link'].objects.link(obj_joint)
+
+        obj_joint = bpy.data.objects["joint.blue.001"].copy()
+        obj_joint.location = (0.0, 0.0, -Q*2+Z)
+        obj_joint.scale = (A, A, A)
+        obj_joint.name = "b2a2.mesh." + move + '.' + part +'.' + helicity
+        bpy.data.collections['link'].objects.link(obj_joint)
+
+        n = 1
+
+        # Pattern 2 of by
+        obj_joint = bpy.data.objects["joint.green.001"].copy()
+        obj_joint.location = (0.0, 0.0, -Q + Q*((n+1) % 2)*4 +Z)
+        obj_joint.scale = (A, A, A)
+        obj_joint.name = "b"+str(n)+"y"+str(n)+".mesh." + move + '.' + part +'.' + helicity
+        bpy.data.collections['link'].objects.link(obj_joint)
+
+        # Pattern 2 of yy
+        obj_joint = bpy.data.objects["joint.gold.00"+str(1 + (n+1) % 2)].copy()
+        obj_joint.location = (0.0, 0.0, +Q*(1 - (n % 2))*2+Z)
+        obj_joint.scale = (A, A, A)
+        obj_joint.name = "y"+str(n)+"y"+str(n+1)+".mesh." + move + '.' + part +'.' + helicity
+        bpy.data.collections['link'].objects.link(obj_joint)
+        
+        for ob in data.collections['link'].objects:
+            if "mesh" in ob.name:
+                ob.select_set(state = True, view_layer = None)
+
+        bpy.ops.object.make_single_user(type='SELECTED_OBJECTS', object=True, obdata=True, material=True, animation=True)
+        bpy.context.scene.cursor.location = (0.0, 0.0, 0.0)
+        bpy.ops.object.origin_set(type='ORIGIN_CURSOR')
 
 
 def formula():
@@ -6175,7 +6104,7 @@ def foots():
 # left or right
     helicity = 'left'
 
-    start = -180
+    start = -225
     end = start+720
 
     global sacrum
@@ -6207,7 +6136,7 @@ def foots():
 # left or right
     helicity = 'left'
 
-    start = -180
+    start = -225
     end = start+720
 
     global heel_left
@@ -6386,14 +6315,14 @@ def sacrum():
 
     global spine
 
-    spine_loc = ((1.15973/0.431828)*A, (2.56867/0.431828)*A, (10.5663/0.431828)*A)
+    spine_loc = ((1.14988/0.431828)*A, (1.5569/0.431828)*A, (29.0811/0.431828)*A)
     spine_rot = mathutils.Euler((math.radians(-271.298), math.radians(46.3207), math.radians(30.618)), 'XYZ')
 
     global sacrum
     sacrum = Sacrum(P, A, move, part, helicity, start, end,
         spine_loc, spine_rot, spine)
 
-    sacrum_loc = ((1.45766/0.431828)*A, (-0.275616/0.431828)*A, (20.0145/0.431828)*A)
+    sacrum_loc = ((0.45766/0.431828)*A, (-0.101086/0.431828)*A, (1.49966/0.431828)*A)
     sacrum_rot = mathutils.Euler((math.radians(0.0), math.radians(0.0), math.radians(79.9487)), 'XYZ')
 
     # position
