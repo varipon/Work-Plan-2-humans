@@ -2026,10 +2026,10 @@ class LeftArm(Formula):
         y[5] = mathutils.Euler(((1.23875/0.4)*A, (-12.4749/0.4)*A, (1.85078/0.4)*A), 'XYZ')
         print ("y5 =", y[5])
 
-        y[6] = mathutils.Euler(((7.23632/0.4)*A, (-3.48651/0.4)*A, (-1.30673/0.4)*A), 'XYZ')
+        y[6] = mathutils.Euler(((16.1624/0.4)*A, (-6.81335/0.4)*A, (-16.0148/0.4)*A), 'XYZ')
         print ("y6 =", y[6])
 
-        y[7] = mathutils.Euler(((7.23631/0.4)*A, (-3.48651/0.4)*A, (-2.54548/0.4)*A), 'XYZ')
+        y[7] = mathutils.Euler(((16.1624/0.4)*A, (-6.81335/0.4)*A, (-17.2536/0.4)*A), 'XYZ')
         print ("y7 =", y[7])
 
         gimbal_b[2] = mathutils.Euler(((1.23875/0.4)*A, 0.0, 0.0), 'XYZ')
@@ -2254,10 +2254,10 @@ class RightArm(LeftArm):
         y[5] = mathutils.Euler(((1.23875/0.4)*A, (-12.4749/0.4)*A, (1.85078/0.4)*A), 'XYZ')
         print ("y5 =", y[5])
 
-        y[6] = mathutils.Euler(((7.23632/0.4)*A, (-3.48651/0.4)*A, (-6.30673/0.4)*A), 'XYZ')
+        y[6] = mathutils.Euler(((28.6854/0.4)*A, (-15.175/0.4)*A, (10.2097/0.4)*A), 'XYZ')
         print ("y6 =", y[6])
 
-        y[7] = mathutils.Euler(((7.23631/0.4)*A, (-3.48651/0.4)*A, (-7.54548/0.4)*A), 'XYZ')
+        y[7] = mathutils.Euler(((28.6854/0.4)*A, (-15.175/0.4)*A, (8.97093/0.4)*A), 'XYZ')
         print ("y7 =", y[7])
 
         gimbal_b[2] = mathutils.Euler(((1.23875/0.4)*A, 0.0, 0.0), 'XYZ')
@@ -2348,10 +2348,10 @@ class Neck(Formula):
         y[2] = mathutils.Euler((-A, (-1/0.747868)*A, 0.0), 'XYZ')
         print ("y2 =", y[2])
 
-        o[1] = mathutils.Euler(((-2.44947/0.747868)*A, -A, 0.0), 'XYZ')
+        o[1] = mathutils.Euler(((-0.345686/0.747868)*A, -A, (3.00451/0.747868)*A), 'XYZ')
         print ("o1 =", o[1])
         
-        b[2] = mathutils.Euler(((-2.57187/0.747868)*A, (-0.046584/0.747868)*A, 0.0), 'XYZ')
+        b[2] = mathutils.Euler(((-0.958157/0.747868)*A, (-0.736301/0.747868)*A, (2.64184/0.747868)*A), 'XYZ')
         print ("b2 =", b[2])
 
     def constructMovement(self, J, helicity, amt, rig, a, b, y, o):
@@ -2403,7 +2403,7 @@ class Neck(Formula):
         ya[1][2].parent = by[1][1]
 
         yo[1][1] = amt.edit_bones.new('y1o1')
-        yo[1][1].head = y[1]
+        yo[1][1].head = a[2]
         yo[1][1].tail = o[1]
         yo[1][1].parent = ya[1][2]
 
@@ -2806,71 +2806,6 @@ class LeftShoulder(RightShoulder):
 
     J = 7 #joint number
 
-    # Overriding
-    def __init__(self, P, A, move, part, helicity, start, end,
-            disciple_loc, disciple_rot, disciple):
-
-        global interval
-        global frame_start
-        global frame_end
-
-        self.interval = interval
-        self.frame_start = frame_start
-        self.frame_end = frame_end
-
-        # pivot factor
-        self.P = P
-
-        # scale factor
-        self.A = A 
-
-        # name
-        self.move = move
-
-        # element
-        self.part = part
-
-        # element helicity
-        self.helicity = helicity
-
-        self.start = start
-        self.end = end
-
-        # disciple position
-        self.disciple_loc = disciple_loc
-        self.disciple_rot = disciple_rot
-
-        # disciple
-        self.disciple = disciple
-
-        # Create armature and object
-        self.amt = bpy.data.armatures.new(move + '.' + part + '.' + helicity + '.data')
-        self.rig = bpy.data.objects.new(move + '.' + part + '.' + helicity, self.amt)
-
-        # Joints
-        self.a = [0 for i in range(4)] # Joint α
-        self.b = [0 for i in range(self.J)] # Joint β
-        self.y = [0 for i in range(self.J)] # Joint γ
-        self.o = [0 for i in range(self.J)] # Joint δ
-
-        # Configuration Movement
-        self.configMovement(self.P, self.A, self.J, self.a, self.b, self.y, self.o)
-
-        # Construction Movement
-        self.constructMovement(self.J, self.helicity, self.amt, self.rig, self.a, self.b, self.y, self.o)
-
-        # Parent set disciple to master       
-        self.setParent(self.helicity, self.move, self.rig, self.disciple_loc, self.disciple_rot, self.disciple)
-
-        # Construction Rotation
-        self.configRotation(self.rig, self.interval, self.frame_start, self.frame_end, self.start, self.end)
-
-        # Configuration Linkage
-        self.configLink(self.A*0.6, self.J, self.helicity, self.rig, self.move, self.part)
-
-        # Construction Linkage
-        self.constructLink(self.A*0.6, self.J, self.helicity, self.rig, self.move, self.part)
-
     def configMovement(self, P, A, J, a, b, y, o):
 
         a[1] = mathutils.Euler((P, A, 0.0), 'XYZ')
@@ -2932,8 +2867,45 @@ class LeftShoulder(RightShoulder):
         o[5] = mathutils.Euler(((0.308378/0.431828)*A, (-3.36622/0.431828)*A, 0.0), 'XYZ')
         print ("o5 =", o[5])
         
-    # Parent set disciple to master        
-    def setParent(self, helicity, move, rig, disciple_loc, disciple_rot, disciple):
+    # Parent set disciple to master
+    def setParent(self, helicity, move, rig, disciple_loc, disciple_rot, disciple, 
+            disciple2_loc, disciple2_rot, disciple2):
+
+        bpy.ops.object.mode_set(mode='OBJECT')
+
+        bpy.context.scene.frame_current = 0
+
+        bpy.ops.object.select_all(action='DESELECT')
+        rig.select_set(state=True)
+        bpy.context.view_layer.objects.active = rig
+
+        bpy.ops.object.editmode_toggle()
+
+        parent_bone = 'y2y3' # choose the bone name which you want to be the parent
+
+        rig.data.edit_bones.active = rig.data.edit_bones[parent_bone]
+
+        bpy.ops.object.mode_set(mode='OBJECT')
+
+        bpy.ops.object.select_all(action='DESELECT') #deselect all objects
+
+        #disciple
+        disciple.rig.select_set(state=True)
+
+        rig.select_set(state=True)
+        bpy.context.view_layer.objects.active = rig    #the active object will be the parent of all selected object
+
+        bpy.ops.object.parent_set(type='BONE', keep_transform=True)
+
+        bpy.ops.object.select_all(action='DESELECT') #deselect all objects
+
+        # disciple position
+        disciple.rig.location.x += disciple_loc[0]
+        disciple.rig.location.y += disciple_loc[1]
+        disciple.rig.location.z += disciple_loc[2]
+
+        disciple.rig.rotation_euler = disciple_rot
+        
 
         bpy.ops.object.mode_set(mode='OBJECT')
 
@@ -2953,7 +2925,8 @@ class LeftShoulder(RightShoulder):
 
         bpy.ops.object.select_all(action='DESELECT') #deselect all objects
 
-        disciple.rig.select_set(state=True)
+        #disciple2
+        disciple2.rig.select_set(state=True)
 
         rig.select_set(state=True)
         bpy.context.view_layer.objects.active = rig    #the active object will be the parent of all selected object
@@ -2962,12 +2935,12 @@ class LeftShoulder(RightShoulder):
 
         bpy.ops.object.select_all(action='DESELECT') #deselect all objects
 
-        # disciple position
-        disciple.rig.location.x += disciple_loc[0]
-        disciple.rig.location.y += disciple_loc[1]
-        disciple.rig.location.z += disciple_loc[2]
+        # disciple2 position
+        disciple2.rig.location.x += disciple2_loc[0]
+        disciple2.rig.location.y += disciple2_loc[1]
+        disciple2.rig.location.z += disciple2_loc[2]
 
-        disciple.rig.rotation_euler = disciple_rot
+        disciple2.rig.rotation_euler = disciple2_rot
 
 
 class Costa(Formula):
@@ -2976,8 +2949,7 @@ class Costa(Formula):
 
     # Overriding
     def __init__(self, P, A, move, part, helicity, start, end, 
-        disciple_loc, disciple_rot, disciple, disciple2,
-        disciple3_loc, disciple3_rot, disciple3):
+        disciple_loc, disciple_rot, disciple, disciple2):
 
         global interval
         global frame_start
@@ -3013,14 +2985,6 @@ class Costa(Formula):
         self.disciple = disciple
         self.disciple2 = disciple2
 
-        # disciple position
-        self.disciple3_loc = disciple3_loc
-        self.disciple3_rot = disciple3_rot
-
-        # disciple
-        self.disciple3 = disciple3
-
-
         # Create armature and object
         self.amt = bpy.data.armatures.new(move + '.' + part + '.' + helicity + '.data')
         self.rig = bpy.data.objects.new(move + '.' + part + '.' + helicity, self.amt)
@@ -3039,8 +3003,7 @@ class Costa(Formula):
 
         # Parent set disciple to master       
         self.setParent(self.helicity, self.move, self.rig, 
-            self.disciple_loc, self.disciple_rot, self.disciple, self.disciple2,
-            self.disciple3_loc, self.disciple3_rot, self.disciple3)
+            self.disciple_loc, self.disciple_rot, self.disciple, self.disciple2)
 
         # Construction Rotation
         self.configRotation(self.rig, self.interval, self.frame_start, self.frame_end, self.start, self.end)
@@ -3191,8 +3154,7 @@ class Costa(Formula):
 
     # Parent set disciple to master        
     def setParent(self, helicity, move, rig, 
-        disciple_loc, disciple_rot, disciple, disciple2,
-        disciple3_loc, disciple3_rot, disciple3):
+        disciple_loc, disciple_rot, disciple, disciple2):
 
         bpy.ops.object.mode_set(mode='OBJECT')
 
@@ -3219,28 +3181,7 @@ class Costa(Formula):
         bpy.context.view_layer.objects.active = rig    #the active object will be the parent of all selected object
 
         bpy.ops.object.parent_set(type='BONE', keep_transform=True)
-        
-        bpy.ops.object.select_all(action='DESELECT') #deselect all objects
-        rig.select_set(state=True)
-        bpy.context.view_layer.objects.active = rig
-
-        bpy.ops.object.editmode_toggle()
-
-        parent_bone = 'o1b2' # choose the bone name which you want to be the parent
-
-        rig.data.edit_bones.active = rig.data.edit_bones[parent_bone]
-
-        bpy.ops.object.mode_set(mode='OBJECT')
-
-        bpy.ops.object.select_all(action='DESELECT') #deselect all objects
-
-        disciple3.rig.select_set(state=True)
-
-        rig.select_set(state=True)
-        bpy.context.view_layer.objects.active = rig    #the active object will be the parent of all selected object
-
-        bpy.ops.object.parent_set(type='BONE', keep_transform=True)
-        
+                
         bpy.ops.object.select_all(action='DESELECT') #deselect all objects
 
         # disciple position
@@ -3256,13 +3197,6 @@ class Costa(Formula):
         disciple2.rig.location.z += disciple_loc[2]
 
         disciple2.rig.rotation_euler = disciple_rot
-
-        # disciple3 position
-        disciple3.rig.location.x += disciple3_loc[0]
-        disciple3.rig.location.y += disciple3_loc[1]
-        disciple3.rig.location.z += disciple3_loc[2]
-
-        disciple3.rig.rotation_euler = disciple3_rot
 
     def configLink(self, A, J, helicity, rig, move, part):
 
@@ -4879,34 +4813,34 @@ class Sacrum(Formula):
         y[1] = mathutils.Euler((-A, -A, 0.0), 'XYZ')
         print ("y1 =", y[1])
 
-        b[2] = mathutils.Euler(((3.0*0.43/0.431828)*A, A, 0.0), 'XYZ')
+        b[2] = mathutils.Euler(((1.6125/0.539785)*A, A, 0.0), 'XYZ')
         print ("b2 =", b[2])
 
-        b[3] = mathutils.Euler(((0.517*0.43/0.431828)*A, (-1.2*0.43/0.431828)*A, 0.0), 'XYZ')
+        b[3] = mathutils.Euler(((0.277888/0.539785)*A, (-0.645/0.539785)*A, 0.0), 'XYZ')
         print ("b3 =", b[3])
         
-        b[4] = mathutils.Euler(((-2.31127*0.43/0.431828)*A, (5.34558*0.43/0.431828)*A-1.0, 0.0), 'XYZ')
+        b[4] = mathutils.Euler(((-1.24461/0.539785)*A, (2.87553/0.539785)*A-1.0, 0.0), 'XYZ')
         print ("b4 =", b[4])
         
         y[2] = mathutils.Euler((A, -A, 0.0), 'XYZ')
         print ("y2 =", y[2])
 
-        y[3] = mathutils.Euler(((0.517158*0.43/0.431828)*A, (-1.48284*0.43/0.431828)*A, 0.0), 'XYZ')
+        y[3] = mathutils.Euler(((0.277973/0.539785)*A, (-0.797027/0.539785)*A, 0.0), 'XYZ')
         print ("y3 =", y[3])
 
-        o[2] = mathutils.Euler(((1.2*0.43/0.431828)*A, (-1.2*0.43/0.431828)*A, 0.0), 'XYZ')
+        o[2] = mathutils.Euler(((0.645/0.539785)*A, (-0.645/0.539785)*A, 0.0), 'XYZ')
         print ("o2 =", o[2])
         
-        o[3] = mathutils.Euler(((-2.31127*0.43/0.431828)*A, (-1.48284*0.43/0.431828)*A, 0.0), 'XYZ')
+        o[3] = mathutils.Euler(((-1.24231/0.539785)*A, (-0.797027/0.539785)*A, 0.0), 'XYZ')
         print ("o3 =", o[3])
         
-        o[4] = mathutils.Euler(((0.234319*0.43/0.431828)*A, (5.34558*0.43/0.431828)*A-1.0, 0.0), 'XYZ')
+        o[4] = mathutils.Euler(((0.125947/0.539785)*A, (2.87554/0.539785)*A-1.0, 0.0), 'XYZ')
         print ("o4 =", o[4])
         
-        y[4] = mathutils.Euler(((0.517161*0.43/0.431828)*A, (5.34558*0.43/0.431828)*A-1.0, 0.0), 'XYZ')
+        y[4] = mathutils.Euler(((0.277954/0.539785)*A, (2.87554/0.539785)*A-1.0, 0.0), 'XYZ')
         print ("y4 =", y[4])
         
-        y[5] = mathutils.Euler(((0.517161*0.43/0.431828)*A, (6.02843*0.43/0.431828)*A-1.0, 0.0), 'XYZ')
+        y[5] = mathutils.Euler(((0.277952/0.539785)*A, (3.24257/0.539785)*A-1.0, 0.0), 'XYZ')
         print ("y5 =", y[5])
 
     # Parent set disciple to master
@@ -5748,8 +5682,8 @@ def wrists():
     start = 0
     end = start-1440
 
-    fingers_loc = ((-0.68215/0.351)*A, (-0.00018/0.351)*A, (-0.657578/0.351)*A)
-    fingers_rot = mathutils.Euler((math.radians(321.304), math.radians(-19.501), math.radians(686.554)), 'XYZ')
+    fingers_loc = ((-0.998894/0.351)*A, (-0.000381/0.351)*A, (-0.349921/0.351)*A)
+    fingers_rot = mathutils.Euler((math.radians(302.398), math.radians(10.1313), math.radians(688.017)), 'XYZ')
 
     global middle_left
     middle_finger = middle_left
@@ -5767,8 +5701,8 @@ def wrists():
     start = 0
     end = start-1440
 
-    fingers_loc = ((-0.100581/0.351)*A, (-1.18765/0.351)*A, (-1.29384/0.351)*A)
-    fingers_rot = mathutils.Euler((math.radians(34.5811), math.radians(-135.255), math.radians(-347.427)), 'XYZ')
+    fingers_loc = ((-0.436933/0.351)*A, (-0.737941/0.351)*A, (-1.12234/0.351)*A)
+    fingers_rot = mathutils.Euler((math.radians(-2.7126), math.radians(-114.769), math.radians(-317.672)), 'XYZ')
 
     global middle_right
     middle_finger = middle_right
@@ -5797,8 +5731,8 @@ def arms():
     start = -180
     end = start+1440
 
-    wrist_loc = ((8.20076/0.4)*A, (-10.8475/0.4)*A, (0.211919/0.4)*A)
-    wrist_rot = mathutils.Euler((math.radians(70.3804), math.radians(237.029), math.radians(-0.412843)), 'XYZ')
+    wrist_loc = ((8.1191/0.4)*A, (-10.9722/0.4)*A, (0.142473/0.4)*A)
+    wrist_rot = mathutils.Euler((math.radians(16.8768), math.radians(208.612), math.radians(29.4008)), 'XYZ')
 
     global wrist_left
     
@@ -5869,10 +5803,8 @@ def arms():
 def forewings():
 
 # scale factor
-    A = 0.276443 #294.31
-#    A = 0.2211544 # 0.276443*0.8 #294.32
-#    A = 0.1769235 # 0.2211544*0.8 #294.33
-
+    A = 0.276443
+    
 # pivot factor
     P = 0
     
@@ -5891,8 +5823,7 @@ def forewings():
     global arm_center
     arm = arm_center
 
-    arm_loc = ((-6.25512/0.276443)*A, (-3.46352/0.276443)*A, (1.27953/0.276443)*A) #294.31
-#    arm_loc = ((-5.71521/0.1769235)*A, (-2.94519/0.1769235)*A, (1.19597/0.1769235)*A) #294.31
+    arm_loc = ((-6.66816/0.276443)*A, (-3.63675/0.276443)*A, (0.589962/0.276443)*A)
     arm_rot = mathutils.Euler((math.radians(438.35), math.radians(21.1454), math.radians(-322.076)), 'XYZ')
 
     global forewing_center
@@ -5906,7 +5837,7 @@ def neck():
     A = 0.747868
 
 # pivot factor
-    P = (-0.373929 /0.747868)*A
+    P = 0
     
 # name
     move = 'swing'
@@ -5917,7 +5848,7 @@ def neck():
 # left or right
     helicity = 'left'
 
-    start = 180
+    start = 0
     end = start+720
 
     global neck
@@ -5944,15 +5875,20 @@ def shoulder():
 # left or right
     helicity = 'right'
 
+    global neck
+
+    neck_loc = ((0.872648/0.431828)*A, (0.442403/0.431828)*A, (-0.077866/0.431828)*A)
+    neck_rot = mathutils.Euler((math.radians(-2.80703), math.radians(183.699), math.radians(18.364)), 'XYZ')
+
     global arm_left
     arm = arm_left
 
-    arm_loc = ((0.431846/0.431828)*A, (-3.36623/0.431828)*A, 0)
-    arm_rot = mathutils.Euler((math.radians(214.582), math.radians(-52.4901), math.radians(-815.036)), 'XYZ')
+    arm_loc = ((0.431019/0.431828)*A, (-3.36615/0.431828)*A, 0)
+    arm_rot = mathutils.Euler((math.radians(177.684), math.radians(-14.7039), math.radians(-764.148)), 'XYZ')
 
     global shoulder_left
     shoulder_left = LeftShoulder(P, A, move, part, helicity, start, end,
-        arm_loc, arm_rot, arm)
+        neck_loc, neck_rot, neck, arm_loc, arm_rot, arm)
 
 # element
     part = 'right-shoulder'
@@ -5960,14 +5896,14 @@ def shoulder():
     global forewing_center
     forewing = forewing_center
 
-    forewing_loc = ((-3.18735/0.431828)*A, (1.08518/0.431828)*A, (-5.00982/0.431828)*A)
-    forewing_rot = mathutils.Euler((math.radians(267.01), math.radians(19.0361), math.radians(-652.284)), 'XYZ')
+    forewing_loc = ((-3.11697/0.431828)*A, (0.938156/0.431828)*A, (-5.6043/0.431828)*A)
+    forewing_rot = mathutils.Euler((math.radians(267.047), math.radians(19.0361), math.radians(-652.284)), 'XYZ')
 
     global arm_right
     arm = arm_right
 
-    arm_loc = ((0.43181/0.431828)*A, (2.50623/0.431828)*A, 0)
-    arm_rot = mathutils.Euler((math.radians(258.278), math.radians(-46.2651), math.radians(-626.913)), 'XYZ')
+    arm_loc = ((0.43249/0.431828)*A, (2.50616/0.431828)*A, 0)
+    arm_rot = mathutils.Euler((math.radians(321.49), math.radians(-16.9803), math.radians(-672.487)), 'XYZ')
 
     global shoulder_right
     shoulder_right = RightShoulder(P, A, move, part, helicity, start, end,
@@ -5997,18 +5933,14 @@ def costa():
     global shoulder_left
     global shoulder_right
 
-    shoulder_loc = ((-3.52979/0.431828)*A, (-0.449888/0.431828)*A, (-0.612247/0.431828)*A)
+    shoulder_loc = ((-3.53031/0.431828)*A, (-0.501201/0.431828)*A, (-0.624153/0.431828)*A)
     shoulder_rot = mathutils.Euler((math.radians(267.956), math.radians(313.136), math.radians(-88.7642)), 'XYZ')
-
-    global neck
-
-    neck_loc = ((-3.96697/0.431828)*A, (-1.41419/0.431828)*A, (-0.112545/0.431828)*A)
-    neck_rot = mathutils.Euler((math.radians(180.136), math.radians(5.38351), math.radians(22.5883)), 'XYZ')
 
     global costa
     costa = Costa(P, A, move, part, helicity, start, end,
-        shoulder_loc, shoulder_rot, shoulder_left, shoulder_right,
-        neck_loc, neck_rot, neck)
+        shoulder_loc, shoulder_rot, shoulder_left, shoulder_right)
+#        shoulder_loc, shoulder_rot, shoulder_left, shoulder_right,
+#        neck_loc, neck_rot, neck)
 
 
 def legs():
@@ -6059,7 +5991,7 @@ def heels():
     helicity = 'left'
 
     start = -270
-    end = start+720
+    end = start-720
 
     global leg_right
 
@@ -6070,7 +6002,7 @@ def heels():
     A = 0.702349*1.94561
 
 # pivot factor
-    P = (-1.02472/(0.702349*1.94561))*A
+    P = (-0.492086/(0.702349*1.94561))*A
 
 # element
     part = 'heel-left'
@@ -6078,8 +6010,8 @@ def heels():
 # left or right
     helicity = 'left'
 
-    start = -180
-    end = start+720
+    start = -90
+    end = start-720
 
     global leg_left
 
@@ -6104,21 +6036,21 @@ def foots():
 # left or right
     helicity = 'left'
 
-    start = -225
+    start = -180
     end = start+720
 
     global sacrum
 
     global heel_right
 
-    heel_right_loc = ((3.03661/0.702349)*A, (-0.699816/0.702349)*A, (1.24279/0.702349)*A)
-    heel_right_rot = mathutils.Euler((math.radians(-89.9314), math.radians(73.0388), math.radians(-179.894)), 'XYZ')
+    heel_right_loc = ((2.83473/0.702349)*A, (-0.699849/0.702349)*A, (1.56365/0.702349)*A)
+    heel_right_rot = mathutils.Euler((math.radians(-89.8682), math.radians(81.265), math.radians(-179.829)), 'XYZ')
 
     global foot_right
     foot_right = Foot(P, A, move, part, helicity, start, end, heel_right_loc, heel_right_rot, heel_right)
 
-    foot_right_loc = ((-4.98322/0.702349)*A, (-2.0/0.702349)*A, (1.4955/0.702349)*A)
-    foot_right_rot = mathutils.Euler((math.radians(0.0), math.radians(0.0), math.radians(140.0)), 'XYZ')
+    foot_right_loc = ((-6.51366/0.702349)*A, (-1.99202/0.702349)*A, (1.4955/0.702349)*A)
+    foot_right_rot = mathutils.Euler((math.radians(0.0), math.radians(0.0), math.radians(145.0)), 'XYZ')
 
     # foot_left position
     foot_right.rig.location.x += foot_right_loc[0]
@@ -6141,13 +6073,13 @@ def foots():
 
     global heel_left
 
-    heel_left_loc = ((-1.19592/0.702349)*A, (-0.780626/0.702349)*A, (0.360072/0.702349)*A)
-    heel_left_rot = mathutils.Euler((math.radians(283.717), math.radians(55.0613), math.radians(-347.719)), 'XYZ')
+    heel_left_loc = ((-1.11039/0.702349)*A, (-0.820633/0.702349)*A, (0.662416/0.702349)*A)
+    heel_left_rot = mathutils.Euler((math.radians(288.121), math.radians(64.1104), math.radians(-342.63)), 'XYZ')
 
     global foot_left
     foot_left = Foot(P, A, move, part, helicity, start, end, heel_left_loc, heel_left_rot, heel_left)
 
-    foot_left_loc = ((5.28489/0.702349)*A, (1.05473/0.702349)*A, (1.49966/0.702349)*A)
+    foot_left_loc = ((6.75672/0.702349)*A, (1.06451/0.702349)*A, (1.49966/0.702349)*A)
     foot_left_rot = mathutils.Euler((math.radians(0.0), math.radians(0.0), math.radians(-65.0)), 'XYZ')
 
     # foot_left position
@@ -6264,7 +6196,7 @@ def spine():
     A = 0.578724
 
 # pivot factor
-    P = (-0.434043/0.578724)*A
+    P = (-0.506383/0.578724)*A
     
 # name
     move = 'swing'
@@ -6282,11 +6214,11 @@ def spine():
     global ilium_left
     global ilium_right
 
-    costa_loc = ((-0.788237/0.578724)*A, (0.00427/0.578724)*A, (0.002334/0.578724)*A)
-    costa_rot = mathutils.Euler((math.radians(0), math.radians(-1.18827), math.radians(-25.0282)), 'XYZ')
+    costa_loc = ((-0.692518/0.578724)*A, (0.028722/0.578724)*A, (-0.035268/0.578724)*A)
+    costa_rot = mathutils.Euler((math.radians(-1.36826), math.radians(-4.81967), math.radians(-34.1749)), 'XYZ')
 
-    ilium_loc = ((6.61037/0.578724)*A, (-5.82085/0.578724)*A, (-0.980478/0.578724)*A)
-    ilium_rot = mathutils.Euler((math.radians(-91.6196), math.radians(4.78974), math.radians(489.118)), 'XYZ')
+    ilium_loc = ((6.34257/0.578724)*A, (-5.48807/0.578724)*A, (-1.09374/0.578724)*A)
+    ilium_rot = mathutils.Euler((math.radians(-91.6206), math.radians(-5.20629), math.radians(489.4)), 'XYZ')
 
     global spine
     spine = Spine(P, A, move, part, helicity, start, end,
@@ -6296,7 +6228,7 @@ def spine():
 def sacrum():
 
 # scale factor
-    A = 0.431828
+    A = 0.539785
 
 # pivot factor
     P = 0
@@ -6310,20 +6242,20 @@ def sacrum():
 # left or right
     helicity = 'left'
 
-    start = 90
+    start = 135
     end = start+720
 
     global spine
 
-    spine_loc = ((1.14988/0.431828)*A, (1.5569/0.431828)*A, (29.0811/0.431828)*A)
-    spine_rot = mathutils.Euler((math.radians(-271.298), math.radians(46.3207), math.radians(30.618)), 'XYZ')
+    spine_loc = ((1.15718/0.539785)*A, (1.76519/0.539785)*A, (29.1331/0.539785)*A)
+    spine_rot = mathutils.Euler((math.radians(-271.255), math.radians(41.3091), math.radians(-426.57)), 'XYZ')
 
     global sacrum
     sacrum = Sacrum(P, A, move, part, helicity, start, end,
         spine_loc, spine_rot, spine)
 
-    sacrum_loc = ((0.45766/0.431828)*A, (-0.101086/0.431828)*A, (1.49966/0.431828)*A)
-    sacrum_rot = mathutils.Euler((math.radians(0.0), math.radians(0.0), math.radians(79.9487)), 'XYZ')
+    sacrum_loc = ((1.16183/0.539785)*A, (0.125822/0.539785)*A, (1.49966/0.539785)*A)
+    sacrum_rot = mathutils.Euler((math.radians(0.0), math.radians(0.0), math.radians(149.949)), 'XYZ')
 
     # position
     sacrum.rig.location.x += sacrum_loc[0]
