@@ -2462,8 +2462,8 @@ class Neck(Formula):
         obj_joint.name = "y1a2.mesh." + move + '.' + part +'.' + helicity
         bpy.data.collections['link'].objects.link(obj_joint)
 
-        obj_joint = bpy.data.objects["joint.copper.y1o1"].copy()
-        obj_joint.location = (0.0, 0.0, +Q*3+Z)
+        obj_joint = bpy.data.objects["joint.gold.A"].copy()
+        obj_joint.location = (0.0, 0.0, 0.0)
         obj_joint.scale = (A, A, A)
         obj_joint.name = "y1o1.mesh." + move + '.' + part +'.' + helicity
         bpy.data.collections['link'].objects.link(obj_joint)
@@ -2491,8 +2491,8 @@ class Neck(Formula):
         bpy.data.collections['link'].objects.link(obj_joint)
         
         # Pattern 1 of ob
-        obj_joint = bpy.data.objects["joint.blue.001"].copy()
-        obj_joint.location = (0.0, 0.0, -Q*2 + Q*(n % 2)*6 +Z)
+        obj_joint = bpy.data.objects["joint.gold.A"].copy()
+        obj_joint.location = (0.0, 0.0, 0.0)
         obj_joint.scale = (A, A, A)
         obj_joint.name = "o"+str(n)+"b"+str(n+1)+".mesh." + move + '.' + part +'.' + helicity
         bpy.data.collections['link'].objects.link(obj_joint)
@@ -2728,11 +2728,7 @@ class RightShoulder(Formula):
     #   Z = -Q*2
         Z = 0.0
 
-        if part == 'leg-right':
-            obj_joint = bpy.data.objects["joint.gold.a2a1.leg-right"].copy()
-        else:
-            obj_joint = bpy.data.objects["joint.gold.a2a1.leg-left"].copy()
-        
+        obj_joint = bpy.data.objects["joint.gold.000"].copy()
         obj_joint.location = (0.0, 0.0, -Q*3+Z)
         obj_joint.scale = (A, A, A)
         obj_joint.name = "a2a1.mesh." + move + '.' + part +'.' + helicity
@@ -4819,7 +4815,7 @@ class Sacrum(Formula):
         b[3] = mathutils.Euler(((0.277888/0.539785)*A, (-0.645/0.539785)*A, 0.0), 'XYZ')
         print ("b3 =", b[3])
         
-        b[4] = mathutils.Euler(((-1.24461/0.539785)*A, (2.87553/0.539785)*A-1.0, 0.0), 'XYZ')
+        b[4] = mathutils.Euler(((-1.24461/0.539785)*A, (2.87553/0.539785)*A, 0.0), 'XYZ')
         print ("b4 =", b[4])
         
         y[2] = mathutils.Euler((A, -A, 0.0), 'XYZ')
@@ -4834,13 +4830,13 @@ class Sacrum(Formula):
         o[3] = mathutils.Euler(((-1.24231/0.539785)*A, (-0.797027/0.539785)*A, 0.0), 'XYZ')
         print ("o3 =", o[3])
         
-        o[4] = mathutils.Euler(((0.125947/0.539785)*A, (2.87554/0.539785)*A-1.0, 0.0), 'XYZ')
+        o[4] = mathutils.Euler(((0.125947/0.539785)*A, (2.87554/0.539785)*A, 0.0), 'XYZ')
         print ("o4 =", o[4])
         
-        y[4] = mathutils.Euler(((0.277954/0.539785)*A, (2.87554/0.539785)*A-1.0, 0.0), 'XYZ')
+        y[4] = mathutils.Euler(((0.277954/0.539785)*A, (2.87554/0.539785)*A, 0.0), 'XYZ')
         print ("y4 =", y[4])
         
-        y[5] = mathutils.Euler(((0.277952/0.539785)*A, (3.24257/0.539785)*A-1.0, 0.0), 'XYZ')
+        y[5] = mathutils.Euler(((0.277952/0.539785)*A, (3.24257/0.539785)*A, 0.0), 'XYZ')
         print ("y5 =", y[5])
 
     # Parent set disciple to master
@@ -4925,7 +4921,11 @@ class Sacrum(Formula):
                 bpy.data.collections['link'].objects.link(obj_joint)
 
                 # Pattern 2 of yy
-                obj_joint = bpy.data.objects["joint.gold.00"+str(1 + (n+1) % 2)].copy()
+                if n == 3:
+                    obj_joint = bpy.data.objects["joint.gold.y3y4.shoulder.sacrum"].copy()
+                else:
+                    obj_joint = bpy.data.objects["joint.gold.00"+str(1 + (n+1) % 2)].copy()                    
+
                 obj_joint.location = (0.0, 0.0, +Q*(1 - (n % 2))*2+Z)
                 obj_joint.scale = (A, A, A)
                 obj_joint.name = "y"+str(n)+"y"+str(n+1)+".mesh." + move + '.' + part +'.' + helicity
@@ -4935,11 +4935,7 @@ class Sacrum(Formula):
             if n <= (J-3):
 
                 # Pattern 1 of ob
-                if n == 3:
-                    obj_joint = bpy.data.objects["joint.blue.o3b4.arm"].copy()
-                else:
-                    obj_joint = bpy.data.objects["joint.blue.001"].copy()
-                
+                obj_joint = bpy.data.objects["joint.blue.001"].copy()
                 obj_joint.location = (0.0, 0.0, -Q*2 + Q*(n % 2)*6 +Z)
                 obj_joint.scale = (A, A, A)
                 obj_joint.name = "o"+str(n)+"b"+str(n+1)+".mesh." + move + '.' + part +'.' + helicity
