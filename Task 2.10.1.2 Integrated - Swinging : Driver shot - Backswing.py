@@ -4485,13 +4485,13 @@ class HindWing(ForeWing):
         obj_joint.name = "g_1.y.mesh." + move + '.' + part +'.' + helicity
         bpy.data.collections['link'].objects.link(obj_joint)
         
-        obj_joint = bpy.data.objects["joint.blue.g_2.x.wing"].copy()
+        obj_joint = bpy.data.objects["joint.blue.g_2.x.hindwing.wing"].copy()
         obj_joint.location = (0.0, 0.0, 0.0)
         obj_joint.scale = (A, A, A)
         obj_joint.name = "g_2.x.mesh." + move + '.' + part +'.' + helicity
         bpy.data.collections['link'].objects.link(obj_joint)
-        
-        obj_joint = bpy.data.objects["joint.silver.g_3.z.wing"].copy()
+
+        obj_joint = bpy.data.objects["joint.silver.g_3.z.hindwing.wing"].copy()
         obj_joint.location = (0.0, 0.0, 0.0)
         obj_joint.scale = (A, A, A)
         obj_joint.name = "g_3.z.mesh." + move + '.' + part +'.' + helicity
