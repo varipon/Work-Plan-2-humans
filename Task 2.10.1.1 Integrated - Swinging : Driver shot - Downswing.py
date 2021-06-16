@@ -2267,7 +2267,7 @@ class RightArm(LeftArm):
         print ("y3.gimbal =", gimbal_y[3])
         
 
-class Neck(Formula):
+class Head(Formula):
 
     J = 4 #joint number
 
@@ -2348,10 +2348,10 @@ class Neck(Formula):
         y[2] = mathutils.Euler((-A, (-1/0.747868)*A, 0.0), 'XYZ')
         print ("y2 =", y[2])
 
-        o[1] = mathutils.Euler(((-0.345686/0.747868)*A, -A, (3.00451/0.747868)*A), 'XYZ')
+        o[1] = mathutils.Euler(((-2.44947/0.747868)*A, -A, 0.0), 'XYZ')
         print ("o1 =", o[1])
         
-        b[2] = mathutils.Euler(((-0.958157/0.747868)*A, (-0.736301/0.747868)*A, (2.64184/0.747868)*A), 'XYZ')
+        b[2] = mathutils.Euler(((-2.31812/0.747868)*A, (-0.04827/0.747868)*A, 0.0), 'XYZ')
         print ("b2 =", b[2])
 
     def constructMovement(self, J, helicity, amt, rig, a, b, y, o):
@@ -2403,7 +2403,7 @@ class Neck(Formula):
         ya[1][2].parent = by[1][1]
 
         yo[1][1] = amt.edit_bones.new('y1o1')
-        yo[1][1].head = a[2]
+        yo[1][1].head = y[1]
         yo[1][1].tail = o[1]
         yo[1][1].parent = ya[1][2]
 
@@ -2462,8 +2462,8 @@ class Neck(Formula):
         obj_joint.name = "y1a2.mesh." + move + '.' + part +'.' + helicity
         bpy.data.collections['link'].objects.link(obj_joint)
 
-        obj_joint = bpy.data.objects["joint.gold.A"].copy()
-        obj_joint.location = (0.0, 0.0, 0.0)
+        obj_joint = bpy.data.objects["joint.copper.y1o1"].copy()
+        obj_joint.location = (0.0, 0.0, +Q*3+Z)
         obj_joint.scale = (A, A, A)
         obj_joint.name = "y1o1.mesh." + move + '.' + part +'.' + helicity
         bpy.data.collections['link'].objects.link(obj_joint)
@@ -2491,8 +2491,8 @@ class Neck(Formula):
         bpy.data.collections['link'].objects.link(obj_joint)
         
         # Pattern 1 of ob
-        obj_joint = bpy.data.objects["joint.gold.A"].copy()
-        obj_joint.location = (0.0, 0.0, 0.0)
+        obj_joint = bpy.data.objects["joint.blue.001"].copy()
+        obj_joint.location = (0.0, 0.0, -Q*2 + Q*(n % 2)*6 +Z)
         obj_joint.scale = (A, A, A)
         obj_joint.name = "o"+str(n)+"b"+str(n+1)+".mesh." + move + '.' + part +'.' + helicity
         bpy.data.collections['link'].objects.link(obj_joint)
@@ -2504,6 +2504,74 @@ class Neck(Formula):
         bpy.ops.object.make_single_user(type='SELECTED_OBJECTS', object=True, obdata=True, material=True, animation=True)
         bpy.context.scene.cursor.location = (0.0, 0.0, 0.0)
         bpy.ops.object.origin_set(type='ORIGIN_CURSOR')
+
+
+class Neck(Wrist):
+    
+    J = 3 #joint number
+
+    # Overriding Configuration Movement
+    def configMovement(self, P, A, J, a, b, y, o):
+
+        a[1] = mathutils.Euler((P, A, 0.0), 'XYZ')
+        print ("a1 =", a[1])
+
+        a[2] = mathutils.Euler((A, -A, 0.0), 'XYZ')
+        print ("a2 =", a[2])
+
+        b[1] = mathutils.Euler((-A, A, 0.0), 'XYZ')
+        print ("b1 =", b[1])
+
+        B = A * 2 * sqrt (2)
+        C = B + (B * sqrt (2))
+        D = C * sqrt (2)
+        E = C + D
+
+        y[1] = mathutils.Euler((-A, -A, 0.0), 'XYZ')
+        print ("y1 =", y[1])
+        
+        y[2] = mathutils.Euler((-A, -(0.173028/0.351)*A, 0.0), 'XYZ')
+        print ("y2 =", y[2])
+
+        o[1] = mathutils.Euler(((-0.77453/0.351)*A, -A, 0.0), 'XYZ')
+        print ("o1 =", o[1])
+
+    # Parent set disciple to master        
+    def setParent(self, helicity, move, rig, disciple_loc, disciple_rot, disciple):
+
+        bpy.ops.object.mode_set(mode='OBJECT')
+
+        bpy.context.scene.frame_current = 0
+
+        bpy.ops.object.select_all(action='DESELECT')
+        rig.select_set(state=True)
+        bpy.context.view_layer.objects.active = rig
+
+        bpy.ops.object.editmode_toggle()
+
+        parent_bone = 'y1a2' # choose the bone name which you want to be the parent
+
+        rig.data.edit_bones.active = rig.data.edit_bones[parent_bone]
+
+        bpy.ops.object.mode_set(mode='OBJECT')
+
+        bpy.ops.object.select_all(action='DESELECT') #deselect all objects
+
+        disciple.rig.select_set(state=True)
+
+        rig.select_set(state=True)
+        bpy.context.view_layer.objects.active = rig    #the active object will be the parent of all selected object
+
+        bpy.ops.object.parent_set(type='BONE', keep_transform=True)
+
+        bpy.ops.object.select_all(action='DESELECT') #deselect all objects
+
+        # disciple position
+        disciple.rig.location.x += disciple_loc[0]
+        disciple.rig.location.y += disciple_loc[1]
+        disciple.rig.location.z += disciple_loc[2]
+
+        disciple.rig.rotation_euler = disciple_rot
 
 
 class RightShoulder(Formula):
@@ -5827,28 +5895,57 @@ def forewings():
             arm_loc, arm_rot, arm)
 
 
-def neck():
+def head():
 
 # scale factor
     A = 0.747868
 
 # pivot factor
-    P = 0
+    P = (-0.373929 /0.747868)*A
     
 # name
     move = 'swing'
 
 # element
-    part = 'neck'
+    part = 'head'
 
 # left or right
     helicity = 'left'
 
     start = 0
+    end = 0
+
+    global head
+    head = Head(P, A, move, part, helicity, start, end)
+
+
+def neck():
+    
+# scale factor
+    A = 0.351
+    
+# pivot factor
+    P = 0
+
+# name
+    move = 'swing'
+
+# neck element
+    part = 'neck'
+
+# helicity
+    helicity = 'left'
+
+    start = 0
     end = start+720
 
+    head_loc = ((-0.607019/0.351)*A, (-0.339796/0.351)*A, (0.446226/0.351)*A)
+    head_rot = mathutils.Euler((math.radians(-89.1445), math.radians(69.9611), math.radians(0.048862)), 'XYZ')
+
+    global head
+    
     global neck
-    neck = Neck(P, A, move, part, helicity, start, end)
+    neck = Neck(P, A, move, part, helicity, start, end, head_loc, head_rot, head)
 
 
 def shoulder():
@@ -5873,7 +5970,7 @@ def shoulder():
 
     global neck
 
-    neck_loc = ((0.872648/0.431828)*A, (0.442403/0.431828)*A, (-0.077866/0.431828)*A)
+    neck_loc = ((0.620426/0.431828)*A, (-0.058946/0.431828)*A, (-0.071649/0.431828)*A)
     neck_rot = mathutils.Euler((math.radians(-2.80703), math.radians(183.699), math.radians(18.364)), 'XYZ')
 
     global arm_left
@@ -6285,6 +6382,7 @@ def main(origin):
     wrists()
     arms()
     forewings()
+    head()
     neck()
     shoulder()
     costa()
