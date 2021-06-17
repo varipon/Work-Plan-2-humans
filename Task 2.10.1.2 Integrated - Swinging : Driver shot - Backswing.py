@@ -5970,7 +5970,7 @@ def shoulder():
 
     global neck
 
-    neck_loc = ((0.872648/0.431828)*A, (0.442403/0.431828)*A, (-0.077866/0.431828)*A)
+    neck_loc = ((0.620426/0.431828)*A, (-0.058946/0.431828)*A, (-0.071649/0.431828)*A)
     neck_rot = mathutils.Euler((math.radians(-2.80703), math.radians(183.699), math.radians(18.364)), 'XYZ')
 
     global arm_left
