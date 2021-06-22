@@ -5912,8 +5912,8 @@ def head():
 # left or right
     helicity = 'left'
 
-    start = 0
-    end = 0
+    start = 161
+    end = 77
 
     global head
     head = Head(P, A, move, part, helicity, start, end)
@@ -6136,8 +6136,8 @@ def foots():
 
     global heel_right
 
-    heel_right_loc = ((2.83473/0.702349)*A, (-0.699849/0.702349)*A, (1.56365/0.702349)*A)
-    heel_right_rot = mathutils.Euler((math.radians(-89.8682), math.radians(81.265), math.radians(-179.829)), 'XYZ')
+    heel_right_loc = ((2.89149/0.702349)*A, (-0.700032/0.702349)*A, (1.4832/0.702349)*A)
+    heel_right_rot = mathutils.Euler((math.radians(-89.8939), math.radians(79.1327), math.radians(-179.81)), 'XYZ')
 
     global foot_right
     foot_right = Foot(P, A, move, part, helicity, start, end, heel_right_loc, heel_right_rot, heel_right)
@@ -6166,8 +6166,8 @@ def foots():
 
     global heel_left
 
-    heel_left_loc = ((-1.11039/0.702349)*A, (-0.820633/0.702349)*A, (0.662416/0.702349)*A)
-    heel_left_rot = mathutils.Euler((math.radians(288.121), math.radians(64.1104), math.radians(-342.63)), 'XYZ')
+    heel_left_loc = ((-1.09739/0.702349)*A, (-0.825035/0.702349)*A, (0.696217/0.702349)*A)
+    heel_left_rot = mathutils.Euler((math.radians(288.843), math.radians(65.1354), math.radians(-341.832)), 'XYZ')
 
     global foot_left
     foot_left = Foot(P, A, move, part, helicity, start, end, heel_left_loc, heel_left_rot, heel_left)
@@ -6181,7 +6181,7 @@ def foots():
     foot_left.rig.location.z += foot_left_loc[2]
 
     foot_left.rig.rotation_euler = foot_left_rot
-
+    
 
 def hindwings():
 
@@ -6340,7 +6340,7 @@ def sacrum():
 
     global spine
 
-    spine_loc = ((1.15718/0.539785)*A, (1.76519/0.539785)*A, (29.1331/0.539785)*A)
+    spine_loc = ((1.15718/0.539785)*A, (1.76519/0.539785)*A, (28.7036/0.539785)*A)
     spine_rot = mathutils.Euler((math.radians(-271.255), math.radians(41.3091), math.radians(-426.57)), 'XYZ')
 
     global sacrum
