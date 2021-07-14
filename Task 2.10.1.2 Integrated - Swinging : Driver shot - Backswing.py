@@ -5743,7 +5743,7 @@ def wrists():
 # helicity
     helicity = 'right'
 
-    start = -606
+    start = -597.656
     end = -606
 
     fingers_loc = ((-0.998894/0.351)*A, (-0.000381/0.351)*A, (-0.349921/0.351)*A)
@@ -5762,7 +5762,7 @@ def wrists():
 # helicity
     helicity = 'right'
 
-    start = -606
+    start = -597.656
     end = -606
 
     fingers_loc = ((-0.436933/0.351)*A, (-0.737941/0.351)*A, (-1.12234/0.351)*A)
@@ -5950,7 +5950,7 @@ def neck():
 
 def shoulder():
 
-    start = -194
+    start = -206.937
     end = -258
  
 # name
@@ -6009,7 +6009,7 @@ def costa():
     A = 0.431828
 
 # pivot factor
-    P = (-0.129548/0.431828)*A
+    P = (-0.153191/0.431828)*A
 
 # name
     move = 'swing'
@@ -6020,14 +6020,17 @@ def costa():
 # left or right
     helicity = 'left'
 
-    start = 270
-    end = 426
+    start = -438
+    end = -606
 
     global shoulder_left
     global shoulder_right
 
-    shoulder_loc = ((-3.53031/0.431828)*A, (-0.501201/0.431828)*A, (-0.624153/0.431828)*A)
-    shoulder_rot = mathutils.Euler((math.radians(267.956), math.radians(313.136), math.radians(-88.7642)), 'XYZ')
+    shoulder_loc = ((-3.53171/0.431828)*A, (-0.652577/0.431828)*A, (-0.653716/0.431828)*A)
+    shoulder_rot = mathutils.Euler((math.radians(267.037), math.radians(298.15), math.radians(-87.643)), 'XYZ')
+
+#    shoulder_loc = ((-3.53031/0.431828)*A, (-0.501201/0.431828)*A, (-0.624153/0.431828)*A)
+#    shoulder_rot = mathutils.Euler((math.radians(267.956), math.radians(313.136), math.radians(-88.7642)), 'XYZ')
 
     global costa
     costa = Costa(P, A, move, part, helicity, start, end,
@@ -6083,7 +6086,7 @@ def heels():
 # left or right
     helicity = 'left'
 
-    start = -569
+    start = -530.27
     end = -573
 
     global leg_right
@@ -6103,7 +6106,7 @@ def heels():
 # left or right
     helicity = 'left'
 
-    start = -389
+    start = -264.988
     end = -393
 
     global leg_left
@@ -6136,8 +6139,8 @@ def foots():
 
     global heel_right
 
-    heel_right_loc = ((2.89149/0.702349)*A, (-0.700032/0.702349)*A, (1.4832/0.702349)*A)
-    heel_right_rot = mathutils.Euler((math.radians(-89.8939), math.radians(79.1327), math.radians(-179.81)), 'XYZ')
+    heel_right_loc = ((3.070093/0.702349)*A, (-0.699871/0.702349)*A, (1.177517/0.702349)*A)
+    heel_right_rot = mathutils.Euler((math.radians(-89.9371), math.radians(71.4606), math.radians(-179.855)), 'XYZ')
 
     global foot_right
     foot_right = Foot(P, A, move, part, helicity, start, end, heel_right_loc, heel_right_rot, heel_right)
@@ -6153,7 +6156,7 @@ def foots():
     foot_right.rig.rotation_euler = foot_right_rot
 
 # pivot factor
-    P = 0.0
+    P = 0
 
 # element
     part = 'foot-left'
@@ -6166,8 +6169,8 @@ def foots():
 
     global heel_left
 
-    heel_left_loc = ((-1.09739/0.702349)*A, (-0.825035/0.702349)*A, (0.696217/0.702349)*A)
-    heel_left_rot = mathutils.Euler((math.radians(288.843), math.radians(65.1354), math.radians(-341.832)), 'XYZ')
+    heel_left_loc = ((-0.995787/0.702349)*A, (-0.852937/0.702349)*A, (0.912213/0.702349)*A)
+    heel_left_rot = mathutils.Euler((math.radians(295.694), math.radians(71.7466), math.radians(-334.479)), 'XYZ')
 
     global foot_left
     foot_left = Foot(P, A, move, part, helicity, start, end, heel_left_loc, heel_left_rot, heel_left)
@@ -6256,8 +6259,8 @@ def ilium():
 # left or right
     helicity = 'left'
 
-    start = -1
-    end = 83
+    start = 39
+    end = 123
 
     global hindwing_left
 
@@ -6289,8 +6292,8 @@ def spine():
     A = 0.578724
 
 # pivot factor
-    P = (-0.506383/0.578724)*A
-    
+    P = (-0.522291/0.578724)*A
+
 # name
     move = 'swing'
 
@@ -6300,18 +6303,18 @@ def spine():
 # left or right
     helicity = 'left'
 
-    start = -360
-    end = -393
+    start = -708
+    end = -876
 
     global costa
     global ilium_left
     global ilium_right
 
-    costa_loc = ((-0.692518/0.578724)*A, (0.028722/0.578724)*A, (-0.035268/0.578724)*A)
-    costa_rot = mathutils.Euler((math.radians(-1.36826), math.radians(-4.81967), math.radians(-34.1749)), 'XYZ')
+    costa_loc = ((-0.704151/0.578724)*A, (0.028196/0.578724)*A, (0.00507/0.578724)*A)
+    costa_rot = mathutils.Euler((math.radians(-0.702845), math.radians(-0.122211), math.radians(-33.2456)), 'XYZ')
 
-    ilium_loc = ((6.34257/0.578724)*A, (-5.48807/0.578724)*A, (-1.09374/0.578724)*A)
-    ilium_rot = mathutils.Euler((math.radians(-91.6206), math.radians(-5.20629), math.radians(489.4)), 'XYZ')
+    ilium_loc = ((5.82218/0.578724)*A, (-5.78619/0.578724)*A, (-1.61162/0.578724)*A)
+    ilium_rot = mathutils.Euler((math.radians(-66.5318), math.radians(-4.75238), math.radians(487.605)), 'XYZ')
 
     global spine
     spine = Spine(P, A, move, part, helicity, start, end,
@@ -6340,8 +6343,8 @@ def sacrum():
 
     global spine
 
-    spine_loc = ((1.15718/0.539785)*A, (1.76519/0.539785)*A, (28.7036/0.539785)*A)
-    spine_rot = mathutils.Euler((math.radians(-271.255), math.radians(41.3091), math.radians(-426.57)), 'XYZ')
+    spine_loc = ((0.872832/0.539785)*A, (2.39804/0.539785)*A, (28.7505/0.539785)*A)
+    spine_rot = mathutils.Euler((math.radians(-271.17), math.radians(36.3102), math.radians(-426.434)), 'XYZ')
 
     global sacrum
     sacrum = Sacrum(P, A, move, part, helicity, start, end,
