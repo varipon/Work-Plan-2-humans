@@ -16,4 +16,6 @@ Task 2.7 : Breast stroke « https://bit.ly/3aqazX0 »
 
 Task 2.8 : Butterfly stroke « https://goo.gl/3RzstG »
 
-(Update) Task 2.9 : Kung Fu « https://goo.gl/kTnwRU »
+Task 2.9 : Kung Fu « https://goo.gl/kTnwRU »
+
+(New) Task 2.10.1 : Driver shot « https://bit.ly/3gJcLgW »
