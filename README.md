@@ -18,4 +18,6 @@ Task 2.8 : Butterfly stroke « https://goo.gl/3RzstG »
 
 Task 2.9 : Kung Fu « https://goo.gl/kTnwRU »
 
-(New) Task 2.10.1 : Driver shot « https://bit.ly/3gJcLgW »
+Task 2.10.1 : Driver shot « https://bit.ly/3gJcLgW »
+
+(New) Task 2.10.2 : Dram major « https://bit.ly/38fvHSK »
